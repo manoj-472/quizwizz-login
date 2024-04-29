@@ -1,0 +1,26 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.container{
+   
+   padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+    margin-left: 10px;
+    width:100%;
+    
+}
+.nav-links{
+    display: flex;
+    gap: 3.5rem;
+    list-style: none;
+
+
+}
+
+.nav-links li a{
+    text-decoration: none;
+}

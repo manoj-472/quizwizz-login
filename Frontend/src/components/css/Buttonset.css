@@ -1,0 +1,33 @@
+.outer-div-buttons{
+    height:400px
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}
+
+.btn{
+    padding: 5px ;
+    background-color: aqua;
+    border-radius: 5%;
+}
+.item2{
+    border:2px solid aqua;
+    border-radius:5%;
+    display:flex;
+}
+.input{
+    
+}
+input[type=text]{
+    border: 2px solid black;
+    height:100%;
+    border:none;
+}
+input[type=text]:focus{
+    outline: none;
+}
