@@ -13,7 +13,6 @@ import LogOut from './components/LogOut'
 import BasicInfo from './components/BasicInfo'
 import QuizzesCreated from './components/QuizzesCreated'
 import QuizzesJoined from './components/QuizzesJoined'
-// import Play from './pages/Play'
 
 import { RequiresAuth } from './contexts/RequiresAuth'
 
@@ -29,7 +28,7 @@ function App() {
        <Route path='joined-quizzes' element={<QuizzesJoined/>}/>
       </Route>
       <Route exact path='/create' element={<RequiresAuth><CreateQuizPage/></RequiresAuth>} />
-      <Route exact path='/join/:id' element={<RequiresAuth><JoinQuiz/></RequiresAuth>} />
+      <Route exact path='/play' element={<RequiresAuth><JoinQuiz /></RequiresAuth>} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
     

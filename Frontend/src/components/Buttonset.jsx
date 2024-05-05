@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import './css/Buttonset.css'
 import { useAuth } from '../contexts/auth'
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 const Buttonset = () => {
     const navigate = useNavigate();
     const [QuizId,setQuizId]=useState("")
     const [warningText,setWarningText]=useState("")
-    const {isLoggedin}=useAuth();
+    const {isLoggedin,user}=useAuth();
     const handleInputChange=(e)=>{
         console.log(e.target.value)
         setWarningText("")
@@ -19,18 +20,32 @@ const Buttonset = () => {
     //     }
     // },[QuizId])
 
-    const handleJoin=(e)=>{
-        if(!isLoggedin){
-            
-            navigate("/login")}
+    const handleJoin=async(e)=>{
+        if(!isLoggedin){navigate("/login")}
         let isEmpty=!QuizId;
         console.log(`isEmpty:${isEmpty}`)
         if(isEmpty){
             (setWarningText("Please enter the Quiz ID"));
-        }
-        else{
-        let isValidQuizid=true;
-        isValidQuizid?navigate(`/quiz/${QuizId}`):setWarningText("Please enter valid Quiz ID");
+        }else{
+            let isValidQuizid=true;//TODO: write isvalid function
+            //isValidQuizid?navigate(`/join/${QuizId}`):;
+            if(isValidQuizid){
+                try{
+                let response=await axios.post(`http://localhost:3000/exam/${QuizId}`,{userid:user.userid});
+                navigate(`/play`,{state:{QuizData:response.data}});
+
+                
+
+                }catch(err){
+                    setWarningText(err.response.data.message)
+
+                }
+                
+            }else{
+                setWarningText("Please enter valid Quiz ID");
+            }
+        
+    
         }
         
     }
