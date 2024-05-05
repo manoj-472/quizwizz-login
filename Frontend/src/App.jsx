@@ -10,7 +10,9 @@ import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 import CreateQuizPage from './pages/CreateQuizPage'
 import LogOut from './components/LogOut'
-
+import BasicInfo from './components/BasicInfo'
+import QuizzesCreated from './components/QuizzesCreated'
+import QuizzesJoined from './components/QuizzesJoined'
 
 import { RequiresAuth } from './contexts/RequiresAuth'
 
@@ -24,9 +26,13 @@ function App() {
       <Route exact path='/' element={<Home/>} />
       <Route exact path='/login' element={<Login/>} />
       <Route exact path='/logout' element={<LogOut/>} />
-      <Route exact path='/profile' element={<RequiresAuth><Profile/></RequiresAuth>} />
+      <Route exact path='/profile' element={<RequiresAuth><Profile/></RequiresAuth>}>
+       <Route index element={<BasicInfo/>}/>
+       <Route path='created-quizzes' element={<QuizzesCreated/>}/>
+       <Route path='joined-quizzes' element={<QuizzesJoined/>}/>
+      </Route>
       <Route exact path='/create' element={<RequiresAuth><CreateQuizPage/></RequiresAuth>} />
-      <Route exact path='/join/:id' element={<RequiresAuth><JoinQuiz/></RequiresAuth>} />
+      <Route exact path='/play' element={<RequiresAuth><JoinQuiz /></RequiresAuth>} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
     

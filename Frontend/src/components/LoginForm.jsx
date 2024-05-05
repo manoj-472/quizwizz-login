@@ -31,7 +31,7 @@ const [warnText,setWarnText]=useState("")
         'Content-Type': 'application/json'
       }
       });
-      
+      console.log(response)
       console.log(response.data.user);
       console.log(response.data.token);
       storeUserData(response.data.token);

@@ -8,7 +8,7 @@ const Navbar = () => {
     const {isLoggedin}=useAuth();
     useEffect(()=>{
         console.log(isLoggedin);
-    })
+    },[])
 
     return (
         <>

@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 const LogOut = () => {
     const {LogOutUser}=useAuth();
     useEffect(()=>{
+     
         LogOutUser();
     },[LogOutUser])
   return <Navigate to="/" />
