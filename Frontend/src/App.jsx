@@ -18,10 +18,6 @@ import QuizzesJoined from './components/QuizzesJoined'
 import { RequiresAuth } from './contexts/RequiresAuth'
 
 function App() {
-
-
-  
-
   return (
     <Routes>
       <Route exact path='/' element={<Home/>} />
