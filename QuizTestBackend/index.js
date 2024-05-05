@@ -13,10 +13,14 @@ const errorMiddleware=require("./middlewares/errorMware")
 //     // console.log(err);
 
 // })
-const PORT =3000
-const MONGODBURL="mongodb://127.0.0.1:27017/quizwizzdb"
+require('dotenv').config();
 
-connectDB(MONGODBURL).then(()=>{
+const PORT =process.env.PORT
+// const MONGODBURL="mongodb+srv://nandakirankante:nandakiran@cluster0.yq655gh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/quizwizz"
+const MONGODB_URL = process.env.MONGODB_URL;
+console.log(MONGODB_URL)
+
+connectDB(MONGODB_URL,{ useNewUrlParser: true, useUnifiedTopology: true }).then(()=>{
     console.log("connected to mongodb succesfully")
 }).catch((err)=>{
     console.log(`not connected${err}`)
@@ -32,7 +36,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 app.use("/auth",authRouter)
-app.use("/quiz",loginRestricted,quizRouter)
+app.use("/quiz",quizRouter)
 app.use("/exam",loginRestricted,examRouter)
 app.use(errorMiddleware)
 

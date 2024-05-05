@@ -21,7 +21,7 @@ body {
 }
 
 h1 {
-    margin-bottom: 30px;
+    margin: 30px 0 1rem 0;
 }
 
 .form-group {
@@ -52,7 +52,9 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
-
+/* .button-box {
+    width: 80%;
+} */
 .social-login {
     margin-top: 20px;
 }
@@ -85,7 +87,7 @@ img{
 
 nav {
     display: flex;
-    margin: 1rem;
+    margin-right: 1rem;
     padding: 0;
     justify-content: space-between;
 }
@@ -96,17 +98,17 @@ nav ul li{
     background: linear-gradient(to right, #ff105f);
     /* width: 2rem;  */
 /* height: 1rem; */
-/* } */
+/* } */ 
 .button-box {
-    width: 210px;
-    margin: 35px auto;
+    width: 220px;
+    border-radius: 3px;
     position: relative;
     box-shadow: 0 0 20px 9px #ff61241f;
     border-radius: 30px;
 }
 
 .toggle-btn {
-    padding: 10px 30px;
+    width: 110px;
     cursor: pointer;
     background: transparent;
     border: 0;
@@ -116,8 +118,8 @@ nav ul li{
 }
 
 .toggle-btn1 {
-    width: 102px;
-    padding: 10px 30px;
+    width: 110px;
+    padding: 10px ;
     cursor: pointer;
     background: transparent;
     border: 0;
@@ -154,7 +156,7 @@ nav ul li{
 
 .form-flex {
     height: 100%;
-    margin: 6rem;
+    margin: 5rem 0 0 14rem;
     padding: 3rem;
     justify-content: center;
     align-items: center;

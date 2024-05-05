@@ -1,0 +1,17 @@
+.all-cards{
+    height: 400px;
+    justify-content: space-around;
+    
+}
+.card{
+    height: 250px ;
+    width: 300px;
+    border:2px dashed black;
+
+}
+.quiz-name-tag{
+    text-align: center;
+}
+.card button{
+    margin: 2px;
+}

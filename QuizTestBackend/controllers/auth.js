@@ -31,7 +31,7 @@ async function handleSignUp(req,res,next){
         console.log("in the catch block");
         return next(err);
     }
-    console.log("after first catch");
+    
     
     try{
         await  User.create({
@@ -48,6 +48,7 @@ async function handleSignUp(req,res,next){
 
 
     const token=createToken(payload);
+    res.cookie("backend",token)
      return res.status(201).json({
             message:`registered successfully for ${name}`,
             token:token
@@ -76,9 +77,10 @@ async function handleLogin(req,res,next){
 
     //check  email if already exits 
     
-    const user= await User.findOne({email,password});
+    let user=null;
     // console.log(payload)
     try{
+    user= await User.findOne({email,password});
     
     if(!user){
         const error = new Error();
@@ -98,7 +100,7 @@ async function handleLogin(req,res,next){
 
 
     const token=createToken(payload);
-    res.cookie("uid",token)
+    res.cookie("backend",token)
     return res.status(200).json({
         message: "Logged In Successfully",
         token:token,

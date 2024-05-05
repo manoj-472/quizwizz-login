@@ -24,7 +24,7 @@ const Login = () => {
                     <div className="form-flex">
                         <div className="headings">
                             <nav>
-                                <div className="button-box d-flex">
+                                <div className="button-box ">
                                     <div id="btn"></div>
                                     <button name="signup" className="toggle-btn hovereffect" onClick={handleToggleClick}> Sign Up </button>
                                     <button name="login" className="toggle-btn1 hovereffect" onClick={handleToggleClick}> Login </button>

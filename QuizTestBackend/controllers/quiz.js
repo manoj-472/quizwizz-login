@@ -13,19 +13,26 @@ async function viewQuiz(req,res){
 
 }
 
-async function createQuiz(req,res){
+async function createQuiz(req,res,next){
     const name=req.body.name;
     var quizid=generateQid();
     const description=req.body.description || "";
     const questions_list=req.body.questions_list;
-    const answers_list=req.body.answers_list;
-    const createdBy=req.user.userid;
+    const createdBy=req.body.user.userid;
     const nameExist=await Quiz.findOne({name:name});
-    if(nameExist)
-    return res.status(400).json({msg:"quiz name taken"});
+    try{
+    if(nameExist){
+    const err=new Error();
+    err.message="quiz name taken";
+    err.status=400;
+    throw err;
+    }}catch(err){
+        next(err);
+    }
     var quizidExist=await Quiz.findOne({quizid:quizid});
     while(quizidExist){
         quizid=generateQid();
+        console.log("generating quiz id again......")
         quizidExist=await Quiz.findOne({quizid:quizid});
     }
 
@@ -35,16 +42,16 @@ async function createQuiz(req,res){
             quizid,
             description,
             questions_list,
-            answers_list,
             createdBy
         })
     }catch(err){
-        return res.json({
-            msg:`error occurred ${err}`
-        });
+        err.status=400;
+        err.extraMessage="error while adding to database"
+        return next(err);
     }
     return res.json({
-        quizid:quizid
+        quizid:quizid,
+        creator:req.body.user.name
     });
 
 

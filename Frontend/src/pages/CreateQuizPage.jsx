@@ -1,10 +1,14 @@
 
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
+import './css/CreateQuizPage.css';
+import { useAuth } from '../contexts/auth';
+import axios from 'axios';
 const CreateQuizPage = () => {
   const [quizName, setQuizName] = useState('');
   const [quizDescription, setQuizDescription] = useState('');
   const [questions, setQuestions] = useState([]);
+ // const [showQuestionForm, setShowQuestionForm] = useState(true);
   const [currentQuestion, setCurrentQuestion] = useState({
     question: '',
     type: 'MCQ',
@@ -12,6 +16,7 @@ const CreateQuizPage = () => {
     answer:'',
     marks: 1
   });
+  const {getUserData}=useAuth();
  
   const handleQuestionChange = (e) => {
     setCurrentQuestion({
@@ -54,6 +59,7 @@ const CreateQuizPage = () => {
       answer: '',
       marks: 1
     });
+    
   };
 
   const handleRemoveQuestion = (index) => {
@@ -62,32 +68,42 @@ const CreateQuizPage = () => {
     setQuestions(updatedQuestions);
   };
 
-  const handleSaveQuiz = () => {
+  const handleSaveQuiz = async() => {
     // Here you can save the quiz data to your backend or wherever you need
+    const user=getUserData()
     const quizData = {
       name: quizName,
       description: quizDescription,
-      questions: questions
+      questions: questions,
+      user:user
     };
     console.log(quizData);
-    // You can add further logic to save the data as required
+    try{
+    let response=await axios.post("http://127.0.0.1:3000/quiz/",quizData)
+    console.log(response.data)
+    }catch(err){
+      console.log("in error");
+      console.log(err.response)
+    }
   };
-
+  //TODO: Add validation
   return (
-    <div>
+    <div className="main-container">
+      <div className="headings-container">
       <h1>Create Quiz</h1>
+      <hr></hr>
       <label>
-        Quiz Name:
-        <input type="text" value={quizName} onChange={(e) => setQuizName(e.target.value)} />
+        <p>Quiz Name:</p>
+        <input type="text" placeholder="Quiz Name" value={quizName} onChange={(e) => setQuizName(e.target.value)} />
       </label>
       <br />
       <label>
-        Quiz Description:
-        <textarea value={quizDescription} onChange={(e) => setQuizDescription(e.target.value)} />
+        <p>Quiz Description:</p>
+        <textarea placeholder="Quiz Description" value={quizDescription} onChange={(e) => setQuizDescription(e.target.value)} />
       </label>
       <br />
       {questions.map((q, index) => (
-        <div key={index}>
+        <div className="question-container" key={index}>
           <h3>Question {index + 1}</h3>
           <p>Question: {q.question}</p>
           <p>Type: {q.type}</p>
@@ -106,7 +122,7 @@ const CreateQuizPage = () => {
           <button onClick={() => handleRemoveQuestion(index)}>Remove Question</button>
         </div>
       ))}
-      <div>
+      <div className="question-container">
         <h3>Add New Question</h3>
         <label>
           Question:
@@ -116,21 +132,22 @@ const CreateQuizPage = () => {
         <label>
           Question Type:
           <select name="type" value={currentQuestion.type} onChange={handleQuestionChange}>
-            <option value="MCQ">Multiple Choice Question</option>
-            <option value="LA">Long Answer</option>
-            <option value="SA">Short Answer</option>
+            <option value="MCQ">MCQ</option>
+            <option value="LA">LA</option>
+            <option value="SA">SA</option>
           </select>
         </label>
         <br />
         {currentQuestion.type === 'MCQ' && (
           <>
             {currentQuestion.options.map((option, index) => (
-              <div key={index}>
+              <div key={index} className='option-container d-flex' >
+                <div>
                 <label>
                   Option {index + 1}:
                   <input type="text" value={option} onChange={(e) => handleOptionChange(e, index)} />
-                </label>
-                <button onClick={() => handleRemoveOption(index)}>Remove Option</button>
+                </label></div>
+                <div><button className="remove" onClick={() => handleRemoveOption(index)}>Remove Option</button></div>
               </div>
             ))}
             <button onClick={handleAddOption}>Add Option</button>
@@ -151,7 +168,11 @@ const CreateQuizPage = () => {
         <br />
         <button onClick={handleAddQuestion}>Add Question</button>
       </div>
-      <button onClick={handleSaveQuiz}>Save Quiz</button>
+      <button lass="save-button" onClick={handleSaveQuiz}>Save Quiz</button>
+    </div>
+    <br />
+    <br />
+    <Link to="/"><button>Back to Home</button></Link>
     </div>
   );
 };
