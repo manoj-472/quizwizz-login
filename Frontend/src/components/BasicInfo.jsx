@@ -1,8 +1,9 @@
 import React from 'react'
 import { useAuth } from '../contexts/auth'
 const BasicInfo = () => {
-const {getUserData}=useAuth();
-const user=getUserData();
+
+const {user}=useAuth();
+
   return (
     <>
     <p>{user.name}</p>

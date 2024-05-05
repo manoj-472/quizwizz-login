@@ -37,7 +37,9 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use("/auth",authRouter)
 app.use("/quiz",quizRouter)
-app.use("/exam",loginRestricted,examRouter)
+
+app.use("/exam",examRouter)
+
 app.use(errorMiddleware)
 
 
