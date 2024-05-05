@@ -63,7 +63,9 @@ async function createQuiz(req,res,next){
     const name=req.body.name;
     var quizid=generateQid();
     const description=req.body.description || "";
+
     const questions_list=req.body.questions;
+
     const createdBy=req.body.user.userid;
     const nameExist=await Quiz.findOne({name:name});
     try{

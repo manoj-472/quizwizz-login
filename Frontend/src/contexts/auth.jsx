@@ -36,7 +36,9 @@ export const AuthProvider=({children})=>{
         
         
     }
+
     const [user,setUser]=useState((isLoggedin?getUserData():null))
+
     
 
 
