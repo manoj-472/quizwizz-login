@@ -77,9 +77,10 @@ async function handleLogin(req,res,next){
 
     //check  email if already exits 
     
-    const user= await User.findOne({email,password});
+    let user=null;
     // console.log(payload)
     try{
+    user= await User.findOne({email,password});
     
     if(!user){
         const error = new Error();

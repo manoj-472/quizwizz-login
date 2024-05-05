@@ -14,6 +14,9 @@ import BasicInfo from './components/BasicInfo'
 import QuizzesCreated from './components/QuizzesCreated'
 import QuizzesJoined from './components/QuizzesJoined'
 
+// import Play from './pages/Play'
+
+
 import { RequiresAuth } from './contexts/RequiresAuth'
 
 function App() {

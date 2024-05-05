@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+
 import { Link, Navigate } from 'react-router-dom';
 import './css/CreateQuizPage.css';
 import { useAuth } from '../contexts/auth';
@@ -18,8 +19,10 @@ const CreateQuizPage = () => {
     answer:'',
     marks: 1
   });
+
   const {user}=useAuth();
   const navigate=useNavigate();
+
  
   const handleQuestionChange = (e) => {
     setCurrentQuestion({
@@ -62,7 +65,7 @@ const CreateQuizPage = () => {
       answer: '',
       marks: 1
     });
-    console.log(questions)
+
     
   };
 
@@ -74,7 +77,7 @@ const CreateQuizPage = () => {
 
   const handleSaveQuiz = async() => {
     // Here you can save the quiz data to your backend or wherever you need
-    
+
     const quizData = {
       name: quizName,
       description: quizDescription,
@@ -85,7 +88,9 @@ const CreateQuizPage = () => {
     try{
     let response=await axios.post("http://127.0.0.1:3000/quiz/",quizData)
     console.log(response.data)
+
     navigate("/profile/created-quizzes");
+
     }catch(err){
       console.log("in error");
       console.log(err.response)
@@ -93,8 +98,10 @@ const CreateQuizPage = () => {
   };
   //TODO: Add validation
   return (
+
     <>
     <Navbar/>
+
     <div className="main-container">
       <div className="headings-container">
       <h1>Create Quiz</h1>

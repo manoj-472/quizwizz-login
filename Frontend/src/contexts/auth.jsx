@@ -8,6 +8,7 @@ export const AuthContext = createContext()
 export const AuthProvider=({children})=>{
     const cookies=new Cookies();
     const [token,setToken]=useState(cookies.get("token"))
+
     let isLoggedin=!!token;
     
     
@@ -36,7 +37,9 @@ export const AuthProvider=({children})=>{
         
         
     }
+
     const [user,setUser]=useState((isLoggedin?getUserData():null))
+
     
 
 

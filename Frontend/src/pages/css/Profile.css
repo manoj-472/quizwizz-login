@@ -1,27 +1,41 @@
-*{
-    box-sizing: border-box;
-}
+
 .side-navbar a{
     text-decoration: none;
     cursor: pointer;
+    /* background-color: #D4F1F4; */
+
     color: white;
     font-weight: bolder;
     font-size: large;
 
 }
 .side-navbar{
-  border:2px  dashed #1a1a1b;
+  /* border:2px  dashed #1a1a1b;
   width: 250px;
+  height: 400px; */
+  width: 300px;
+  height: 450px;
+  background-color: lightblue;
+  margin: 8px 8px 4px 8px;
+  justify-content: flex;
+
 
 }
 .navitem{
     width: 100%;
-    background-color: #673ab7;
-    height: 60px;
+
+    border: none;
     margin-bottom: 15px ;
     margin-top: 15px;
     align-content: center;
-    
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    padding: 4px 0;
+    color: black;
+    text-decoration: none;
+    justify-content: center;
+
     
 }
 .navitem p{
